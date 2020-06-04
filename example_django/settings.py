@@ -125,6 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'staticfiles'
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -135,4 +136,3 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL='users.User'
-STATIC_ROOT = 'staticfiles'
