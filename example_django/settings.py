@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True if os.environ['MODE'] == 'dev' else False
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,12 +41,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'users',
     'example',
+    'corsheaders',
 
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -81,7 +83,10 @@ WSGI_APPLICATION = 'example_django.wsgi.application'
 DATABASES = {
   'default': dj_database_url.config(conn_max_age=600)
 }
-
+# CORS_ORIGIN_ALLOW_ALL=True
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8000',
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
